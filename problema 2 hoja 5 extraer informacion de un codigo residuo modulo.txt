@@ -1,0 +1,87 @@
+#include <iostream>
+#include <conio.h>
+#include <math.h>
+using namespace std;
+using namespace System;
+int main()
+{
+
+	long long Codigo = 6769150770731042;
+	int aux,HH,MM;
+	float Monto1, Monto2;
+	char PP1;
+	char PP2;
+	bool esCE1, esCE2;
+	//cout << "Ingrese Codigo: ";
+	//cin >> Codigo;
+	Monto1 = Monto2 = 0;
+	PP1 = Codigo / pow(10,14);
+	aux = Codigo / pow(10, 12);
+	PP2 = aux % 100;
+	aux = Codigo / pow(10, 10);
+	HH = aux % 100;
+	aux = Codigo / pow(10, 8);
+	MM = aux % 100;
+	if (PP1 == 'C' && PP2 == 'E')//CELULAR
+	{
+		Monto1 = 0.35 * ((HH * 60) + MM);
+		cout << "Cantidad de Horas Celular: " << HH<<endl;
+		cout << "Cantidad de Minutos Celular: " << MM << endl;
+		esCE1 = true;
+	}
+	else if (PP1 == 'F' && PP2 == 'I')//FIJO
+	{
+		Monto1 = 0.15 * ((HH * 60) + MM);
+		cout << "Cantidad de Horas Fijo: " << HH << endl;
+		cout << "Cantidad de Minutos Fijo: " << MM << endl;
+		esCE1 = false;
+	}
+	//PARA LA SEGUNDA PARTE 8 RESTANTES
+	aux = Codigo / pow(10, 6);
+	PP1 = aux % 100;
+	aux = Codigo / pow(10, 4);
+	PP2 = aux % 100;
+	aux = Codigo / pow(10, 2);
+	HH = aux % 100;
+	MM = Codigo % 100;
+	if (PP1 == 'C' && PP2 == 'E')//CELULAR
+	{
+		Monto2 = 0.35 * ((HH * 60) + MM);
+		cout << "Cantidad de Horas Celular: " << HH << endl;
+		cout << "Cantidad de Minutos Celular: " << MM << endl;
+		esCE2 = true;
+	}
+	else if (PP1 == 'F' && PP2 == 'I')//FIJO
+	{
+		Monto2 = 0.15 * ((HH * 60) + MM);
+		cout << "Cantidad de Horas Fijo: " << HH << endl;
+		cout << "Cantidad de Minutos Fijo: " << MM << endl;
+		esCE2 = false;
+	}
+	cout << "Monto a pagar: " <<Monto1 + Monto2;
+	if (esCE1 == true && esCE2 == false)// CELU VS FIJO
+	{
+		if(Monto1 > Monto2)
+			cout << "El mayor gasto Celular";
+		else
+			cout << "El mayor gasto Fijo";
+	}
+	else if (esCE1 == false && esCE2 == true)// FIJO VS CELULA
+	{
+		if (Monto1 > Monto2)
+			cout << "El mayor gasto Fijo";
+		else
+			cout << "El mayor gasto Celular";
+	}
+	else if (esCE1 == true && esCE2 == true)// CELULAR VS CELU
+	{
+		cout << "El mayor gasto Celular";
+	}
+	else if (esCE1 == false && esCE2 == false)// FIJO VS FIJO
+	{
+		cout << "El mayor gasto Fijo";
+	}	
+
+	getch();
+	return 0;
+}
